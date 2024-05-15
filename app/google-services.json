@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "1080993663565",
+    "firebase_url": "https://akhmatyanov-23d7e-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "akhmatyanov-23d7e",
+    "storage_bucket": "akhmatyanov-23d7e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1080993663565:android:182d474cd359655a596a04",
+        "android_client_info": {
+          "package_name": "com.example.ahmatynov"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-OTH1P4N9OvPnQoDU2OVs7qeg-pxO6lk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
