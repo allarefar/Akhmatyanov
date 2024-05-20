@@ -9,7 +9,11 @@
         android:id="@+id/homeFragment"
         android:name="com.example.ahmatynov.homeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_newsFragment"
+            app:destination="@id/newsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.ahmatynov.profileFragment"
@@ -20,4 +24,9 @@
         android:name="com.example.ahmatynov.noticeFragment"
         android:label="fragment_notice"
         tools:layout="@layout/fragment_notice" />
+    <fragment
+        android:id="@+id/newsFragment"
+        android:name="com.example.ahmatynov.newsFragment"
+        android:label="fragment_news"
+        tools:layout="@layout/fragment_news" />
 </navigation>
