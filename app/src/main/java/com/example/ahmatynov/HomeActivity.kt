@@ -16,4 +16,8 @@ class HomeActivity : AppCompatActivity() {
         btnNavView.setupWithNavController(controller)
 
     }
+    override fun onSupportNavigateUp(): Boolean {
+        val navController = findNavController(R.id.fragmentContainerView)
+        return navController.navigateUp() || super.onSupportNavigateUp()
+    }
 }

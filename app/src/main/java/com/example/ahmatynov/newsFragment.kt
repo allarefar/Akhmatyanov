@@ -54,9 +54,9 @@ class newsFragment : Fragment() {
 
             for (element in newsElements) {
                 val title = element.select("h3").text()
-                val date = element.select("p").text()
+                val date = element.select("p[class=t--1 c-text-secondary mb-2]").text()
                 val link = element.select("a").attr("href")
-                val description = element.select("p.description").text()
+                val description = element.select("p[class=t--3 t-uppercase px-3 py-2 bg-theme-1 с-text-primary l-inherit l-hover-primary d-inline-block mb-2]").text()
 
                 val newsItem = NewsItem(title, date, link, description)
                 newsList.add(newsItem)
