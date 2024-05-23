@@ -1,17 +1,21 @@
-package com.example.ahmatynov
+package com.example.ahmatynov.reg
 
+import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
-import com.google.firebase.database.*
+import androidx.appcompat.app.AppCompatActivity
+import com.example.ahmatynov.R
+import com.google.firebase.database.FirebaseDatabase
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var database: FirebaseDatabase
+    private val sharedPreferencesName = "user_prefs"
+    private val userIdKey = "user_id"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,13 +55,26 @@ class MainActivity : AppCompatActivity() {
             database.reference.child("users").child(it).setValue(user)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        Toast.makeText(this, "Пользователь $login добавлен", Toast.LENGTH_LONG).show()
+                        saveUserIdToSharedPreferences(it)
+                        Toast.makeText(this, "Пользователь $login добавлен", Toast.LENGTH_LONG)
+                            .show()
                         clearFields()
                     } else {
-                        Toast.makeText(this, "Ошибка при добавлении пользователя в базу данных: ${task.exception?.message}", Toast.LENGTH_LONG).show()
+                        Toast.makeText(
+                            this,
+                            "Ошибка при добавлении пользователя в базу данных: ${task.exception?.message}",
+                            Toast.LENGTH_LONG
+                        ).show()
                     }
                 }
         }
+    }
+
+    private fun saveUserIdToSharedPreferences(userId: String) {
+        val sharedPreferences = getSharedPreferences(sharedPreferencesName, Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putString(userIdKey, userId)
+        editor.apply()
     }
 
     private fun clearFields() {

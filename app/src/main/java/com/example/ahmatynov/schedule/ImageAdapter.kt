@@ -1,4 +1,4 @@
-package com.example.ahmatynov
+package com.example.ahmatynov.schedule
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +7,7 @@ import android.widget.ImageView
 import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.ahmatynov.R
 
 class ImageAdapter(
     private val imageUrlList: List<String>,

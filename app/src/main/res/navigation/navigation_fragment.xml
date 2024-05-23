@@ -31,12 +31,12 @@
         tools:layout="@layout/fragment_notice" />
     <fragment
         android:id="@+id/newsFragment"
-        android:name="com.example.ahmatynov.newsFragment"
+        android:name="com.example.ahmatynov.news.newsFragment"
         android:label="fragment_news"
         tools:layout="@layout/fragment_news" />
     <fragment
         android:id="@+id/scheduleFragment"
-        android:name="com.example.ahmatynov.ScheduleFragment"
+        android:name="com.example.ahmatynov.schedule.ScheduleFragment"
         android:label="fragment_schedule"
         tools:layout="@layout/fragment_schedule" >
         <action
@@ -45,7 +45,7 @@
     </fragment>
     <fragment
         android:id="@+id/fullScreenImageFragment"
-        android:name="com.example.ahmatynov.FullScreenImageFragment"
+        android:name="com.example.ahmatynov.schedule.FullScreenImageFragment"
         android:label="fragment_full_screen_image"
         tools:layout="@layout/fragment_full_screen_image" >
         <argument

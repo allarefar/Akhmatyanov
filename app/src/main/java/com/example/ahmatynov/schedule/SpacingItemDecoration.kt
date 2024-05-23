@@ -1,4 +1,4 @@
-package com.example.ahmatynov
+package com.example.ahmatynov.schedule
 
 import android.graphics.Rect
 import android.view.View

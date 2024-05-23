@@ -1,13 +1,19 @@
-package com.example.ahmatynov
+package com.example.ahmatynov.reg
 
+import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
-import com.google.firebase.database.*
+import androidx.appcompat.app.AppCompatActivity
+import com.example.ahmatynov.HomeActivity
+import com.example.ahmatynov.R
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 class AuthActivity : AppCompatActivity() {
 
@@ -15,6 +21,18 @@ class AuthActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val sharedPreferences = getSharedPreferences("MyApp", Context.MODE_PRIVATE)
+        val isLoggedIn = sharedPreferences.getBoolean("IS_LOGGED_IN", false)
+
+        if (isLoggedIn) {
+            // Пользователь уже авторизован, переходим на основной экран
+            val intent = Intent(this, HomeActivity::class.java)
+            startActivity(intent)
+            finish()
+            return
+        }
+
         setContentView(R.layout.activity_auth)
 
         val userLogin: EditText = findViewById(R.id.user_login_auth)
@@ -51,6 +69,13 @@ class AuthActivity : AppCompatActivity() {
                     for (userSnapshot in snapshot.children) {
                         val user = userSnapshot.getValue(User::class.java)
                         if (user != null && user.password == pass) {
+                            // Сохраняем идентификатор пользователя в SharedPreferences
+                            val sharedPreferences = getSharedPreferences("MyApp", Context.MODE_PRIVATE)
+                            val editor = sharedPreferences.edit()
+                            editor.putString("USER_ID", userSnapshot.key)
+                            editor.putBoolean("IS_LOGGED_IN", true)
+                            editor.apply()
+
                             Toast.makeText(this@AuthActivity, "Успешная авторизация", Toast.LENGTH_LONG).show()
                             val intent = Intent(this@AuthActivity, HomeActivity::class.java)
                             startActivity(intent)

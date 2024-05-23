@@ -1,4 +1,4 @@
-package com.example.ahmatynov
+package com.example.ahmatynov.news
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

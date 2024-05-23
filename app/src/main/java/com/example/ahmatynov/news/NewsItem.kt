@@ -1,4 +1,4 @@
-package com.example.ahmatynov
+package com.example.ahmatynov.news
 
 data class NewsItem(
     val title: String,

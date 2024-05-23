@@ -1,4 +1,4 @@
-package com.example.ahmatynov
+package com.example.ahmatynov.schedule
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,6 +8,7 @@ import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
+import com.example.ahmatynov.R
 
 class FullScreenImageFragment : Fragment() {
 

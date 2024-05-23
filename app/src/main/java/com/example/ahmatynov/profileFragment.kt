@@ -1,59 +1,95 @@
 package com.example.ahmatynov
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.TextView
+import android.widget.Toast
+import androidx.fragment.app.Fragment
+import com.example.ahmatynov.reg.AuthActivity
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [profileFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class profileFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var database: DatabaseReference
+
+    private lateinit var last_name: TextView
+    private lateinit var first_name: TextView
+    private lateinit var class_name: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false)
+        val view = inflater.inflate(R.layout.fragment_profile, container, false)
+
+        last_name = view.findViewById(R.id.last_name)
+        first_name = view.findViewById(R.id.first_name)
+        class_name = view.findViewById(R.id.class_name)
+
+        database = FirebaseDatabase.getInstance().getReference("users")
+
+        loadUserProfile()
+
+        val buttonLogout: Button = view.findViewById(R.id.button_logout)
+        buttonLogout.setOnClickListener {
+            logout()
+        }
+
+        return view
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment profileFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            profileFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    private fun logout() {
+        // Удаляем сохраненные данные пользователя из SharedPreferences
+        val sharedPreferences = requireContext().getSharedPreferences("MyApp", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.remove("USER_ID")
+        editor.remove("IS_LOGGED_IN")
+        editor.apply()
+
+        // Перенаправляем пользователя на страницу авторизации
+        val intent = Intent(requireContext(), AuthActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
+    }
+
+    private fun loadUserProfile() {
+        val sharedPreferences = requireContext().getSharedPreferences("MyApp", Context.MODE_PRIVATE)
+        val userId = sharedPreferences.getString("USER_ID", null)
+
+        userId?.let {
+            database.child(it).get().addOnSuccessListener { dataSnapshot ->
+                if (dataSnapshot.exists()) {
+                    val firstname = dataSnapshot.child("firstname").value.toString()
+                    val lastname = dataSnapshot.child("lastname").value.toString()
+                    val className = dataSnapshot.child("className").value.toString()
+
+                    class_name.text = className
+                    first_name.text = firstname
+                    last_name.text = lastname
+                } else {
+                    // Обработка случая, когда данные не найдены
+                    Toast.makeText(requireContext(), "Пользовательские данные не найдены", Toast.LENGTH_LONG).show()
+                    val intent = Intent(requireContext(), AuthActivity::class.java)
+                    startActivity(intent)
+                    activity?.finish()
                 }
+            }.addOnFailureListener {
+                // Обработка ошибки при получении данных
+                Toast.makeText(requireContext(), "Ошибка при загрузке данных: ${it.message}", Toast.LENGTH_LONG).show()
             }
+        } ?: run {
+            // Обработка случая, когда идентификатор пользователя не найден
+            Toast.makeText(requireContext(), "Пользователь не авторизован", Toast.LENGTH_LONG).show()
+            // Перенаправляем на экран логина
+            val intent = Intent(requireContext(), AuthActivity::class.java)
+            startActivity(intent)
+            activity?.finish()
+        }
     }
 }

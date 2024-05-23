@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#1e90ff"
-    tools:context=".AuthActivity">
+    tools:context=".reg.AuthActivity">
 
     <TextView
         android:layout_width="wrap_content"
