@@ -17,6 +17,9 @@
         <action
             android:id="@+id/action_homeFragment_to_scheduleFragment"
             app:destination="@id/scheduleFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_gradesFragment"
+            app:destination="@id/gradesFragment" />
 
     </fragment>
     <fragment
@@ -52,5 +55,10 @@
             android:name="imageUrl"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/gradesFragment"
+        android:name="com.example.ahmatynov.GradesFragment"
+        android:label="fragment_grades"
+        tools:layout="@layout/fragment_grades" />
 
 </navigation>

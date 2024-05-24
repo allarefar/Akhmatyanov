@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.ahmatynov"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -65,6 +65,9 @@ dependencies {
     implementation("com.google.firebase:firebase-storage:21.0.0")
     implementation("com.github.bumptech.glide:glide:4.12.0")
     implementation("com.github.chrisbanes:PhotoView:2.3.0")
+    implementation("org.apache.poi:poi:5.2.3")
+    implementation("org.apache.poi:poi-ooxml:5.2.3")
+    implementation("com.github.sufficientlysecure:html-textview:3.0")
     annotationProcessor("com.github.bumptech.glide:compiler:4.12.0")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

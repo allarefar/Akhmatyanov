@@ -1,11 +1,11 @@
 package com.example.ahmatynov
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 
 private const val ARG_PARAM1 = "param1"
@@ -31,6 +31,7 @@ class homeFragment : Fragment() {
         var view= inflater.inflate(R.layout.fragment_home, container, false)
         view.findViewById<Button>(R.id.button_news).setOnClickListener{view.findNavController().navigate(R.id.action_homeFragment_to_newsFragment)}
         view.findViewById<Button>(R.id.button_resp).setOnClickListener {view.findNavController().navigate(R.id.action_homeFragment_to_scheduleFragment)}
+        view.findViewById<Button>(R.id.button_table).setOnClickListener {view.findNavController().navigate(R.id.action_homeFragment_to_gradesFragment)}
 
         return view
     }
