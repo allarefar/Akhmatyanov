@@ -1,10 +1,11 @@
-package com.example.ahmatynov
+package com.example.ahmatynov.tabl
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.ahmatynov.R
 
 class GradesAdapter(private val data: List<List<String>>) :
     RecyclerView.Adapter<GradesAdapter.GradeViewHolder>() {

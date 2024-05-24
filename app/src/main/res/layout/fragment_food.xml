@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".tabl.GradesFragment">
+    tools:context=".food.FoodFragment">
 
     <com.otaliastudios.zoom.ZoomLayout
-        android:id="@+id/zoom_layout_grades"
+        android:id="@+id/zoom_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1">
@@ -17,7 +17,8 @@
             android:id="@+id/tableLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="8dp">
+            android:stretchColumns="*"
+            android:padding="16dp">
         </TableLayout>
     </com.otaliastudios.zoom.ZoomLayout>
 </LinearLayout>

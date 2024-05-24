@@ -32,6 +32,7 @@ class homeFragment : Fragment() {
         view.findViewById<Button>(R.id.button_news).setOnClickListener{view.findNavController().navigate(R.id.action_homeFragment_to_newsFragment)}
         view.findViewById<Button>(R.id.button_resp).setOnClickListener {view.findNavController().navigate(R.id.action_homeFragment_to_scheduleFragment)}
         view.findViewById<Button>(R.id.button_table).setOnClickListener {view.findNavController().navigate(R.id.action_homeFragment_to_gradesFragment)}
+        view.findViewById<Button>(R.id.button_food).setOnClickListener { view.findNavController().navigate(R.id.action_homeFragment_to_fileSelectFragment) }
 
         return view
     }

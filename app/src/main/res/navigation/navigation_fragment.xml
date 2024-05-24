@@ -20,6 +20,9 @@
         <action
             android:id="@+id/action_homeFragment_to_gradesFragment"
             app:destination="@id/gradesFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_fileSelectFragment"
+            app:destination="@id/fileSelectFragment" />
 
     </fragment>
     <fragment
@@ -57,8 +60,27 @@
     </fragment>
     <fragment
         android:id="@+id/gradesFragment"
-        android:name="com.example.ahmatynov.GradesFragment"
+        android:name="com.example.ahmatynov.tabl.GradesFragment"
         android:label="fragment_grades"
         tools:layout="@layout/fragment_grades" />
+    <fragment
+        android:id="@+id/foodFragment"
+        android:name="com.example.ahmatynov.food.FoodFragment"
+        android:label="fragment_food"
+        tools:layout="@layout/fragment_food" />
+    <fragment
+        android:id="@+id/fileSelectFragment"
+        android:name="com.example.ahmatynov.food.FileSelectFragment"
+        android:label="fragment_file_select"
+        tools:layout="@layout/fragment_file_select" >
+        <action
+            android:id="@+id/action_fileSelectFragment_to_foodFragment"
+            app:destination="@id/foodFragment">
+        <argument
+            android:name="fileName"
+            app:argType="string" />
+        </action>
+
+    </fragment>
 
 </navigation>

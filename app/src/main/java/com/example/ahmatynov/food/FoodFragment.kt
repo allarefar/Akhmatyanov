@@ -1,4 +1,4 @@
-package com.example.ahmatynov
+package com.example.ahmatynov.food
 
 import android.content.Context
 import android.os.Bundle
@@ -11,42 +11,54 @@ import android.widget.TableRow
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.example.ahmatynov.R
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import com.otaliastudios.zoom.ZoomLayout
 import org.apache.poi.ss.usermodel.CellType
 import org.apache.poi.ss.usermodel.DateUtil
 import org.apache.poi.ss.usermodel.WorkbookFactory
 import java.io.InputStream
 
-class GradesFragment : Fragment() {
+class FoodFragment : Fragment() {
 
     private lateinit var storageReference: StorageReference
     private lateinit var tableLayout: TableLayout
+    private lateinit var zoomLayout: ZoomLayout
+    private var fileName: String? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            fileName = it.getString("fileName")
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_grades, container, false)
+        val view = inflater.inflate(R.layout.fragment_food, container, false)
 
         // Получаем ссылку на Firebase Storage
         storageReference = FirebaseStorage.getInstance().reference
 
-        // Инициализируем TableLayout
+        // Инициализируем элементы UI
         tableLayout = view.findViewById(R.id.tableLayout)
+        zoomLayout = view.findViewById(R.id.zoom_layout)
 
-        // Загрузить таблицу Excel
-        loadExcelFile()
+        // Загружаем файл Excel
+        fileName?.let {
+            loadExcelFile(it)
+        }
 
         return view
     }
 
-    private fun loadExcelFile() {
+    private fun loadExcelFile(fileName: String) {
         val userClass = getUserClassFromSharedPreferences()
-
-        // Путь к файлу в Firebase Storage
-        val filePath = "table/$userClass/table.xlsx"
-        Log.d("GradesFragment", "Путь к файлу: $filePath")
+        val filePath = "food/$fileName"
+        Log.d("FoodFragment", "Путь к файлу: $filePath")
 
         val fileRef = storageReference.child(filePath)
 
@@ -54,7 +66,7 @@ class GradesFragment : Fragment() {
             displayExcelFile(bytes)
         }.addOnFailureListener { exception ->
             Toast.makeText(context, "Ошибка загрузки файла: ${exception.message}", Toast.LENGTH_LONG).show()
-            Log.e("GradesFragment", "Ошибка загрузки файла", exception)
+            Log.e("FoodFragment", "Ошибка загрузки файла", exception)
         }
     }
 
@@ -63,6 +75,8 @@ class GradesFragment : Fragment() {
             val inputStream: InputStream = bytes.inputStream()
             val workbook = WorkbookFactory.create(inputStream)
             val sheet = workbook.getSheetAt(0)
+
+            tableLayout.removeAllViews()
 
             for (row in sheet) {
                 val tableRow = TableRow(context)
@@ -95,7 +109,7 @@ class GradesFragment : Fragment() {
 
         } catch (e: Exception) {
             Toast.makeText(context, "Ошибка отображения файла: ${e.message}", Toast.LENGTH_LONG).show()
-            Log.e("GradesFragment", "Ошибка отображения файла", e)
+            Log.e("FoodFragment", "Ошибка отображения файла", e)
         }
     }
 

@@ -49,21 +49,12 @@
         app:layout_constraintTop_toBottomOf="@+id/button_resp" />
 
     <Button
-        android:id="@+id/button_books"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Учебники"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_table" />
-
-    <Button
         android:id="@+id/button_food"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Питание"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_books" />
+        app:layout_constraintTop_toBottomOf="@+id/button_table" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
