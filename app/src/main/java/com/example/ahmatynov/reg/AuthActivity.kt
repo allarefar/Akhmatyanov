@@ -74,6 +74,7 @@ class AuthActivity : AppCompatActivity() {
                             val editor = sharedPreferences.edit()
                             editor.putString("USER_ID", userSnapshot.key)
                             editor.putString("USER_CLASS", user.className)
+                            editor.putString("USER_TYPE", user.type)
                             editor.putBoolean("IS_LOGGED_IN", true)
                             editor.apply()
 

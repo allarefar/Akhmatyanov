@@ -32,7 +32,7 @@
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/noticeFragment"
-        android:name="com.example.ahmatynov.noticeFragment"
+        android:name="com.example.ahmatynov.notice.noticeFragment"
         android:label="fragment_notice"
         tools:layout="@layout/fragment_notice" />
     <fragment
