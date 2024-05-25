@@ -28,16 +28,12 @@ class FileSelectFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_file_select, container, false)
 
-        // Получаем ссылку на Firebase Storage
         storageReference = FirebaseStorage.getInstance().reference
 
-        // Инициализируем элементы UI
         fileListView = view.findViewById(R.id.file_list_view)
 
-        // Загрузить список файлов
         loadFileList()
 
-        // Обработчик выбора файла
         fileListView.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
             val selectedFile = fileList[position]
             val action = FileSelectFragmentDirections.actionFileSelectFragmentToFoodFragment(selectedFile)
@@ -48,6 +44,8 @@ class FileSelectFragment : Fragment() {
     }
 
     private fun loadFileList() {
+        fileList.clear() // Очистка списка файлов перед загрузкой
+
         val userClass = getUserClassFromSharedPreferences()
         val path = "food/"
 

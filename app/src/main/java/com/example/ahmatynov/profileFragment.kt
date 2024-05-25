@@ -21,6 +21,7 @@ class profileFragment : Fragment() {
     private lateinit var last_name: TextView
     private lateinit var first_name: TextView
     private lateinit var class_name: TextView
+    private lateinit var type_name: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,6 +32,7 @@ class profileFragment : Fragment() {
         last_name = view.findViewById(R.id.last_name)
         first_name = view.findViewById(R.id.first_name)
         class_name = view.findViewById(R.id.class_name)
+        type_name = view.findViewById(R.id.type_name)
 
         database = FirebaseDatabase.getInstance().getReference("users")
 
@@ -68,7 +70,9 @@ class profileFragment : Fragment() {
                     val firstname = dataSnapshot.child("firstname").value.toString()
                     val lastname = dataSnapshot.child("lastname").value.toString()
                     val className = dataSnapshot.child("className").value.toString()
+                    val type = dataSnapshot.child("type").value.toString()
 
+                    type_name.text = type
                     class_name.text = className
                     first_name.text = firstname
                     last_name.text = lastname

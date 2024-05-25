@@ -40,14 +40,11 @@ class FoodFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_food, container, false)
 
-        // Получаем ссылку на Firebase Storage
         storageReference = FirebaseStorage.getInstance().reference
 
-        // Инициализируем элементы UI
         tableLayout = view.findViewById(R.id.tableLayout)
         zoomLayout = view.findViewById(R.id.zoom_layout)
 
-        // Загружаем файл Excel
         fileName?.let {
             loadExcelFile(it)
         }
